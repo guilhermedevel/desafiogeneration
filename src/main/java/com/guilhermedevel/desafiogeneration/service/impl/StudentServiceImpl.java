@@ -51,6 +51,23 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student update(StudentRequest studentRequest, Integer id) {
-        return null;
+        var studentFound = this.findById(id);
+
+        var studentUpdated = Student.builder()
+                .withId(studentFound.getId())
+                .withName(studentRequest.getName())
+                .withAge(studentRequest.getAge())
+                .withNote1(studentRequest.getNote1())
+                .withNote2(studentRequest.getNote2())
+                .withProfessorName(studentRequest.getProfessorName())
+                .withClassId(studentRequest.getClassId())
+                .build();
+
+        return this.studentRepository.save(studentUpdated);
+    }
+
+    @Override
+    public void delete(Integer id) {
+        this.studentRepository.delete(this.findById(id));
     }
 }

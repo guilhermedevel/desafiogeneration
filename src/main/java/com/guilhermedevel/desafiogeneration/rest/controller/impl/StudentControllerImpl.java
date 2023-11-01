@@ -42,4 +42,18 @@ public class StudentControllerImpl implements StudentController {
 
         return ResponseEntity.ok(student);
     }
+
+    @Override
+    public ResponseEntity<Student> update(StudentRequest studentRequest, Integer id) {
+        var studentUpdated = this.studentService.update(studentRequest, id);
+
+        return ResponseEntity.ok(studentUpdated);
+    }
+
+    @Override
+    public ResponseEntity<Void> delete(Integer id) {
+        this.studentService.delete(id);
+
+        return ResponseEntity.noContent().build();
+    }
 }
